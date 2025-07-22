@@ -96,7 +96,7 @@ if __name__ == '__main__':
 
     num_iters = len(train_loader)
     if args.checkpoint:
-        checkpoint = torch.load(args.checkpoint)
+        checkpoint = torch.load(args.checkpoint, weights_only=False)
         start_epoch = checkpoint["epoch"]
         best_dice = checkpoint["best_dice"]
         model.load_state_dict(checkpoint["model"])
