@@ -34,7 +34,7 @@ class LiTS(Dataset):
         
         target = sitk.ReadImage(self.targets[idx])
         target = sitk.GetArrayFromImage(target)
-        # target[target == 1] = 0
+        target[target == 1] = 0
         target[target == 2] = 1 
         target = target.astype(np.float32)
         
