@@ -46,7 +46,7 @@ if __name__ == '__main__':
                     drop_last=False 
                 )
     model = Unet()
-    checkpoint = torch.load(args.checkpoint)
+    checkpoint = torch.load(args.checkpoint, weights_only=True)
     model.load_state_dict(checkpoint["model"])
     if torch.cuda.is_available():
         device = torch.device("cuda")
