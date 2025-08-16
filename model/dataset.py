@@ -40,8 +40,8 @@ class LiTS(Dataset):
             for image, target, liver_mask in zip(
                 sorted(os.listdir(image_folder)),
                 sorted(os.listdir(target_folder)),
-                sorted(os.listdir(mask_folder)),
-            ):
+                sorted(os.listdir(mask_folder))):
+                
                 image_path = os.path.join(image_folder, image)
                 target_path = os.path.join(target_folder, target)
                 mask_path = os.path.join(mask_folder, liver_mask)
