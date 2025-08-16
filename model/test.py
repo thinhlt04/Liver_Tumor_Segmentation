@@ -17,6 +17,7 @@ def get_args():
     parser.add_argument('--lowerbound', '-lb', type=int, default=0)
     parser.add_argument('--upperbound', '-ub', type=int, default=100)
     parser.add_argument('--json_dir', '-jd', type=str, default=None)
+    parser.add_argument('--liver_mask', '-lm', type=bool, default=None)
     args = parser.parse_args()
     return args
 
@@ -36,7 +37,8 @@ if __name__ == '__main__':
                     lowerbound=args.lowerbound,
                     upperbound=args.upperbound,
                     transform=transform, 
-                    target_transform=target_transform
+                    target_transform=target_transform, 
+                    liver_mask=args.liver_mask
                 )
     
     test_loader = DataLoader(
