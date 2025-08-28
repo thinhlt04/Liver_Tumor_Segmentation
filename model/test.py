@@ -61,10 +61,6 @@ if __name__ == '__main__':
     all_masks = []
 
     for batch in test_loader:
-        if args.liver_mask:
-            image, mask, liver_mask = batch
-            liver_mask = liver_mask.float()
-        else: image, mask = batch
         image = image.to(device)
         mask = mask.to(device)
         
