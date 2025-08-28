@@ -61,6 +61,7 @@ if __name__ == '__main__':
     all_masks = []
 
     for batch in test_loader:
+        image, mask = batch
         image = image.to(device)
         mask = mask.to(device)
         
