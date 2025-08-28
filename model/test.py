@@ -18,6 +18,7 @@ def get_args():
     parser.add_argument('--upperbound', '-ub', type=int, default=100)
     parser.add_argument('--json_dir', '-jd', type=str, default=None)
     parser.add_argument('--liver_mask', '-lm', type=bool, default=None)
+    parser.add_argument("--bce_weight", "-bw", type=float, default=1.0)
     args = parser.parse_args()
     return args
 
@@ -60,7 +61,10 @@ if __name__ == '__main__':
     all_masks = []
 
     for batch in test_loader:
-        image, mask = batch
+        if args.liver_mask:
+            image, mask, liver_mask = batch
+            liver_mask = liver_mask.float()
+        else: image, mask = batch
         image = image.to(device)
         mask = mask.to(device)
         
@@ -74,7 +78,7 @@ if __name__ == '__main__':
         all_masks.extend(mask)
 
     scores = compute_scores(all_predictions, all_masks)
-    output_file = os.path.join(args.json_dir, f"scores_hu_{args.lowerbound}_{args.upperbound}.json")
+    output_file = os.path.join(args.json_dir, f"scores_bce_{args.bce_weight}.json")
     with open(output_file, 'w') as f:
         json.dump(scores, f)
 
